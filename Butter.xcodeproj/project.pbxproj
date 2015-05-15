@@ -18,6 +18,8 @@
 		270913451AFFFC5800760545 /* ColorHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 270913441AFFFC5800760545 /* ColorHelper.m */; };
 		270913491B0001CD00760545 /* AddTimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 270913471B0001CD00760545 /* AddTimerViewController.m */; };
 		2709134A1B0001CD00760545 /* AddTimerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 270913481B0001CD00760545 /* AddTimerViewController.xib */; };
+		3CB0F5071B06705E00A57EB0 /* Timer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CB0F5061B06705E00A57EB0 /* Timer.m */; };
+		3CB0F50D1B06735C00A57EB0 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CB0F50C1B06735C00A57EB0 /* DataManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +52,10 @@
 		270913461B0001CD00760545 /* AddTimerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTimerViewController.h; sourceTree = "<group>"; };
 		270913471B0001CD00760545 /* AddTimerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddTimerViewController.m; sourceTree = "<group>"; };
 		270913481B0001CD00760545 /* AddTimerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddTimerViewController.xib; sourceTree = "<group>"; };
+		3CB0F5051B06705E00A57EB0 /* Timer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Timer.h; sourceTree = "<group>"; };
+		3CB0F5061B06705E00A57EB0 /* Timer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Timer.m; sourceTree = "<group>"; };
+		3CB0F50B1B06735C00A57EB0 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
+		3CB0F50C1B06735C00A57EB0 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,16 +97,11 @@
 		270913161AFFF42000760545 /* Butter */ = {
 			isa = PBXGroup;
 			children = (
+				3CB0F50A1B0670A800A57EB0 /* Utilities */,
+				3CB0F5091B06708A00A57EB0 /* Controller */,
+				3CB0F5081B06706600A57EB0 /* Model */,
 				2709131B1AFFF42000760545 /* AppDelegate.h */,
 				2709131C1AFFF42000760545 /* AppDelegate.m */,
-				270913211AFFF42000760545 /* HomeViewController.h */,
-				270913221AFFF42000760545 /* HomeViewController.m */,
-				270913241AFFF42000760545 /* Main.storyboard */,
-				270913461B0001CD00760545 /* AddTimerViewController.h */,
-				270913471B0001CD00760545 /* AddTimerViewController.m */,
-				270913481B0001CD00760545 /* AddTimerViewController.xib */,
-				270913431AFFFC5800760545 /* ColorHelper.h */,
-				270913441AFFFC5800760545 /* ColorHelper.m */,
 				270913271AFFF42000760545 /* Images.xcassets */,
 				270913291AFFF42000760545 /* LaunchScreen.xib */,
 				2709131E1AFFF42000760545 /* Butter.xcdatamodeld */,
@@ -133,6 +134,39 @@
 				270913351AFFF42100760545 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3CB0F5081B06706600A57EB0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3CB0F5051B06705E00A57EB0 /* Timer.h */,
+				3CB0F5061B06705E00A57EB0 /* Timer.m */,
+				3CB0F50B1B06735C00A57EB0 /* DataManager.h */,
+				3CB0F50C1B06735C00A57EB0 /* DataManager.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		3CB0F5091B06708A00A57EB0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				270913211AFFF42000760545 /* HomeViewController.h */,
+				270913221AFFF42000760545 /* HomeViewController.m */,
+				270913241AFFF42000760545 /* Main.storyboard */,
+				270913461B0001CD00760545 /* AddTimerViewController.h */,
+				270913471B0001CD00760545 /* AddTimerViewController.m */,
+				270913481B0001CD00760545 /* AddTimerViewController.xib */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		3CB0F50A1B0670A800A57EB0 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				270913431AFFFC5800760545 /* ColorHelper.h */,
+				270913441AFFFC5800760545 /* ColorHelper.m */,
+			);
+			name = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,7 +276,9 @@
 				270913491B0001CD00760545 /* AddTimerViewController.m in Sources */,
 				2709131D1AFFF42000760545 /* AppDelegate.m in Sources */,
 				270913231AFFF42000760545 /* HomeViewController.m in Sources */,
+				3CB0F50D1B06735C00A57EB0 /* DataManager.m in Sources */,
 				2709131A1AFFF42000760545 /* main.m in Sources */,
+				3CB0F5071B06705E00A57EB0 /* Timer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,6 +473,7 @@
 				2709133C1AFFF42100760545 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2709133D1AFFF42100760545 /* Build configuration list for PBXNativeTarget "ButterTests" */ = {
 			isa = XCConfigurationList;
@@ -445,6 +482,7 @@
 				2709133F1AFFF42100760545 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
