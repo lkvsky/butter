@@ -8,30 +8,59 @@
 
 #import "HomeViewController.h"
 #import "ColorHelper.h"
+#import "DataManager.h"
+#import "AddTimerViewController.h"
 
 @interface HomeViewController ()
-@property (weak, nonatomic) IBOutlet UIButton *addTimerButton;
+@property (weak, nonatomic) CAGradientLayer *backgroundGradient;
+@property (strong, nonatomic) NSArray *timers;
 @end
 
 @implementation HomeViewController
 
-- (IBAction)touchAddTimerButton:(UIButton *)sender
-{
-    
-}
 
-- (void)setBackgroundGradient
+#pragma mark - View Initialization
+
+- (void)setupBackgroundGradient
 {
     CAGradientLayer *gradient = [[ColorHelper sharedInstance] yellowGradient];
-    gradient.frame = self.view.bounds;
+    gradient.frame = [UIScreen mainScreen].bounds;
     [self.view.layer insertSublayer:gradient atIndex:0];
+    self.backgroundGradient = gradient;
+}
+
+- (void)setupNavBar
+{
+    UIBarButtonItem *plusButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"add.png"] style:UIBarButtonItemStylePlain target:self action:@selector(tapPlus)];
+    self.navigationItem.rightBarButtonItem = plusButton;
+    
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"Pacifico" size:21.0]}];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    self.title = @"Buttr";
+
+    [self setupNavBar];
+    [self setupBackgroundGradient];
     
-    self.navigationController.navigationBarHidden = YES;
-    [self setBackgroundGradient];
+    self.timers = [[DataManager sharedInstance] doFetchRequestForEntityWithName:@"Timer" withPredicate:nil withSortDescriptors:nil withBatchSize:@5];
+}
+
+#pragma mark - Gestures and Events
+
+- (IBAction)tapPlus
+{
+    AddTimerViewController *addTimerVC = [[AddTimerViewController alloc] initWithNibName:@"AddTimerViewController" bundle:nil];
+    [self showViewController:addTimerVC sender:self];
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    [self.backgroundGradient removeFromSuperlayer];
+    self.backgroundGradient = nil;
+    [self setupBackgroundGradient];
 }
 
 @end

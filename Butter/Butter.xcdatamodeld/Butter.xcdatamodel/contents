@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14D136" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Timer" representedClassName="Timer" syncable="YES">
+    <entity name="Interval" representedClassName="Interval" syncable="YES">
         <attribute name="duration" attributeType="Integer 64" minValueString="0" defaultValueString="0" syncable="YES"/>
+        <relationship name="timer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Timer" inverseName="intervals" inverseEntity="Timer" syncable="YES"/>
+    </entity>
+    <entity name="Timer" representedClassName="Timer" syncable="YES">
+        <attribute name="cancelTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="duration" attributeType="Integer 64" minValueString="0" defaultValueString="0" syncable="YES"/>
+        <attribute name="endTime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="startTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="intervals" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Interval" inverseName="timer" inverseEntity="Interval" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Timer" positionX="-63" positionY="-18" width="128" height="73"/>
+        <element name="Timer" positionX="-63" positionY="-18" width="128" height="133"/>
+        <element name="Interval" positionX="106" positionY="-18" width="128" height="73"/>
     </elements>
 </model>

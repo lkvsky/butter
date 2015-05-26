@@ -10,6 +10,19 @@
 
 @implementation DataManager
 
+- (instancetype) init
+{
+    self = [super init];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(contextDidSave:) name:NSManagedObjectContextDidSaveNotification object:nil];
+    
+    return self;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 + (instancetype)sharedInstance
 {
     static DataManager *dataManager = nil;
@@ -46,11 +59,22 @@
     return _readingContext;
 }
 
+#pragma mark - Notifications / Events
+
+- (void)contextDidSave:(NSNotification *)saveNotification
+{
+    if ([NSThread isMainThread]) {
+        [self.readingContext mergeChangesFromContextDidSaveNotification:saveNotification];
+    } else {
+        [self performSelectorOnMainThread:@selector(contextDidSave:) withObject:saveNotification waitUntilDone:NO];
+    }
+}
+
 #pragma mark - Create / Update Data
 
 - (NSFetchRequest *)createFetchRequestForEntityWithName:(NSString *)entityName withPredicate:(NSPredicate *)predicate withSortDescriptors:(NSArray *)sortDescriptors withBatchSize:(NSNumber *)batchSize
 {
-    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:_readingContext];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:self.readingContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     fetchRequest.entity = entity;
     
@@ -69,12 +93,11 @@
     return fetchRequest;
 }
 
-
 - (NSArray *)doFetchRequestForEntityWithName:(NSString *)entityName withPredicate:(NSPredicate *)predicate withSortDescriptors:(NSArray *)sortDescriptors withBatchSize:(NSNumber *)batchSize
 {
     NSFetchRequest *fetchRequest = [self createFetchRequestForEntityWithName:entityName withPredicate:predicate withSortDescriptors:sortDescriptors withBatchSize:batchSize];
     NSError *error;
-    NSArray *results = [_readingContext executeFetchRequest:fetchRequest error:&error];
+    NSArray *results = [self.readingContext executeFetchRequest:fetchRequest error:&error];
     
     if (nil != results) {
         return results;
@@ -82,6 +105,16 @@
         //handle error - this is for debug only
         NSLog(@"%@ %@", error, error.localizedDescription);
         abort();
+    }
+}
+
+- (void)saveContext
+{
+    NSError *error;
+    BOOL successfulSave = [self.insertionContext save:&error];
+    
+    if (!successfulSave) {
+        NSLog(@"Error saving context: %@, %@", error, [error localizedDescription]);
     }
 }
 @end

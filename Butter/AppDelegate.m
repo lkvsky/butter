@@ -18,7 +18,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     DataManager *dataManager = [DataManager sharedInstance];
-    dataManager.persistentStoreCoordinator = _persistentStoreCoordinator;
+    dataManager.persistentStoreCoordinator = self.persistentStoreCoordinator;
     
     return YES;
 }

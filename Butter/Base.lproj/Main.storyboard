@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="1il-11-LzM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="1il-11-LzM">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="sanfranciscotext-regular-webfont.ttf">
+            <string>SanFranciscoText-Regular</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
         <!--Home View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -16,41 +22,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6wn-hW-w5D">
-                                <rect key="frame" x="250" y="250" width="100" height="100"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="IcM-It-2PU"/>
-                                    <constraint firstAttribute="height" constant="100" id="u4f-Ab-OqX"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="100"/>
-                                <state key="normal" title="+">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="touchAddTimerButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WBg-Yf-fih"/>
-                                </connections>
-                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Tap '+' to get cooking!" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dLo-2b-6un">
+                                <rect key="frame" x="37" y="253" width="527" height="94"/>
+                                <fontDescription key="fontDescription" name="SanFranciscoText-Regular" family="San Francisco Text" pointSize="50"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="centerY" secondItem="6wn-hW-w5D" secondAttribute="centerY" id="WPp-Fj-Jhd"/>
-                            <constraint firstAttribute="centerX" secondItem="6wn-hW-w5D" secondAttribute="centerX" id="bRx-fE-Uk0"/>
+                            <constraint firstItem="dLo-2b-6un" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="21" id="CWh-oB-obP"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="dLo-2b-6un" secondAttribute="trailing" constant="20" id="Uba-kY-3xj"/>
+                            <constraint firstAttribute="centerY" secondItem="dLo-2b-6un" secondAttribute="centerY" id="j4M-NM-0Zm"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="jX4-gp-IOt"/>
-                    <connections>
-                        <outlet property="addTimerButton" destination="6wn-hW-w5D" id="I6D-mq-926"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1252" y="342"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Butter Navigation View Controller-->
         <scene sceneID="SJZ-9D-mRV">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1il-11-LzM" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1il-11-LzM" customClass="ButterNavigationViewController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="eFw-Ag-4df">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
