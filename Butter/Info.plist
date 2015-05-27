@@ -2,17 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIAppFonts</key>
-	<array>
-		<string></string>
-		<string>Pacifico.ttf</string>
-		<string>sanfranciscotext-bold-webfont.ttf</string>
-		<string>sanfranciscotext-bolditalic-webfont.ttf</string>
-		<string>sanfranciscotext-regular-webfont.ttf</string>
-		<string>sanfranciscotext-regularitalic-webfont.ttf</string>
-		<string>sanfranciscotext-thin-webfont.ttf</string>
-		<string>sanfranciscotext-thinitalic-webfont.ttf</string>
-	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -33,6 +22,17 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>UIAppFonts</key>
+	<array>
+		<string></string>
+		<string>Pacifico.ttf</string>
+		<string>sanfranciscotext-bold-webfont.ttf</string>
+		<string>sanfranciscotext-bolditalic-webfont.ttf</string>
+		<string>sanfranciscotext-regular-webfont.ttf</string>
+		<string>sanfranciscotext-regularitalic-webfont.ttf</string>
+		<string>sanfranciscotext-thin-webfont.ttf</string>
+		<string>sanfranciscotext-thinitalic-webfont.ttf</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
