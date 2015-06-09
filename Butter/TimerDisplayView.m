@@ -72,7 +72,7 @@
                                                             toItem:self
                                                          attribute:NSLayoutAttributeCenterY
                                                         multiplier:1.0
-                                                          constant:0]];
+                                                          constant:-20]];
     }
     
     // store weak references
@@ -80,7 +80,7 @@
     self.minutesLabel = minutesLabel;
     self.hoursLabel = hoursLabel;
     
-    // apply horizontal center constraints
+    // apply horizontal center constraints for labels
     [self addConstraint:[NSLayoutConstraint constraintWithItem:secondsLabel
                                                      attribute:NSLayoutAttributeCenterX
                                                      relatedBy:NSLayoutRelationEqual
@@ -105,6 +105,7 @@
                                                     multiplier:1.0
                                                       constant:-kLabelCenterOffset]];
     
+    // apply horizontal center constraints for dividers
     [self addConstraint:[NSLayoutConstraint constraintWithItem:leftDivider
                                                      attribute:NSLayoutAttributeCenterX
                                                      relatedBy:NSLayoutRelationEqual
@@ -122,6 +123,83 @@
                                                       constant:kLabelCenterOffset / 2]];
 }
 
+- (UIView *)createEditControlsForType:(ButtrUnit)unit
+{
+    UIButton *addButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    UIButton *subtractButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    UIView *buttonContainer = [[UIView alloc] init];
+    
+    [addButton setTitle:@"+" forState:UIControlStateNormal];
+    [subtractButton setTitle:@"-" forState:UIControlStateNormal];
+    
+    [addButton addTarget:self action:@selector(addControlTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [subtractButton addTarget:self action:@selector(subtractControlTapped:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    for (UIButton *button in @[subtractButton, addButton]) {
+        [buttonContainer addSubview:button];
+        button.tag = unit;
+        button.translatesAutoresizingMaskIntoConstraints = NO;
+        button.layer.cornerRadius = 15;
+        button.layer.borderColor = [UIColor blackColor].CGColor;
+        button.layer.borderWidth = 1;
+        
+        [buttonContainer addConstraint:[NSLayoutConstraint constraintWithItem:button
+                                                                    attribute:NSLayoutAttributeWidth
+                                                                    relatedBy:NSLayoutRelationEqual
+                                                                       toItem:buttonContainer
+                                                                    attribute:NSLayoutAttributeWidth
+                                                                   multiplier:0.5
+                                                                     constant:-1]];
+        
+        [buttonContainer addConstraint:[NSLayoutConstraint constraintWithItem:button
+                                                                    attribute:NSLayoutAttributeTop
+                                                                    relatedBy:NSLayoutRelationEqual
+                                                                       toItem:buttonContainer
+                                                                    attribute:NSLayoutAttributeTop
+                                                                   multiplier:1.0
+                                                                     constant:0]];
+        
+        [buttonContainer addConstraint:[NSLayoutConstraint constraintWithItem:button
+                                                                    attribute:NSLayoutAttributeBottom
+                                                                    relatedBy:NSLayoutRelationEqual
+                                                                       toItem:buttonContainer
+                                                                    attribute:NSLayoutAttributeBottom
+                                                                   multiplier:1.0
+                                                                     constant:0]];
+    }
+    
+    [buttonContainer addConstraint:[NSLayoutConstraint constraintWithItem:subtractButton
+                                                                attribute:NSLayoutAttributeLeading
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:buttonContainer
+                                                                attribute:NSLayoutAttributeLeft
+                                                               multiplier:1.0
+                                                                 constant:0]];
+    
+    [buttonContainer addConstraint:[NSLayoutConstraint constraintWithItem:addButton
+                                                                attribute:NSLayoutAttributeTrailing
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:buttonContainer
+                                                                attribute:NSLayoutAttributeRight
+                                                               multiplier:1.0
+                                                                 constant:0]];
+    
+    return buttonContainer;
+}
+
+#pragma mark - Gestures and Events
+
+- (void)addControlTapped:(UIButton *)button
+{
+    [self updateTime:1 forType:button.tag];
+}
+
+- (void)subtractControlTapped:(UIButton *)button
+{
+    [self updateTime:-1 forType:button.tag];
+}
+
 #pragma mark - Time Management Helpers
 
 - (void)updateTime:(NSInteger)timeDifference forType:(ButtrUnit)unit
@@ -133,9 +211,11 @@
             
         case ButtrMinutes:
             self.minutes += timeDifference;
+            break;
             
-        case ButterHours:
+        case ButtrHours:
             self.hours += timeDifference;
+            break;
             
         default:
             break;
@@ -153,6 +233,51 @@
 
 #pragma mark - Public Methods
 
+- (void)renderEditControls
+{
+    UIView *secondsControl = [self createEditControlsForType:ButtrSeconds];
+    UIView *minutesControl = [self createEditControlsForType:ButtrMinutes];
+    UIView *hoursControl = [self createEditControlsForType:ButtrHours];
+
+    for (UIView *controls in @[secondsControl, minutesControl, hoursControl]) {
+        controls.translatesAutoresizingMaskIntoConstraints = NO;
+        [self addSubview:controls];
+        
+        [self addConstraint:[NSLayoutConstraint constraintWithItem:controls
+                                                         attribute:NSLayoutAttributeCenterY
+                                                         relatedBy:NSLayoutRelationEqual
+                                                            toItem:self
+                                                         attribute:NSLayoutAttributeCenterY
+                                                        multiplier:1.0
+                                                          constant:kLabelCenterOffset/3]];
+    }
+    
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:secondsControl
+                                                     attribute:NSLayoutAttributeCenterX
+                                                     relatedBy:NSLayoutRelationEqual
+                                                        toItem:self
+                                                     attribute:NSLayoutAttributeCenterX
+                                                    multiplier:1.0
+                                                      constant:kLabelCenterOffset]];
+    
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:minutesControl
+                                                     attribute:NSLayoutAttributeCenterX
+                                                     relatedBy:NSLayoutRelationEqual
+                                                        toItem:self
+                                                     attribute:NSLayoutAttributeCenterX
+                                                    multiplier:1.0
+                                                      constant:0]];
+    
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:hoursControl
+                                                     attribute:NSLayoutAttributeCenterX
+                                                     relatedBy:NSLayoutRelationEqual
+                                                        toItem:self
+                                                     attribute:NSLayoutAttributeCenterX
+                                                    multiplier:1.0
+                                                      constant:-kLabelCenterOffset]];
+    
+}
+
 - (void)renderTime:(NSInteger)time
 {
     self.seconds = time % 60;
@@ -162,14 +287,9 @@
     [self updateTimerLabel];
 }
 
-- (void)addTimeForType:(ButtrUnit)unit;
+- (NSInteger)getTimerDuration
 {
-    [self updateTime:1 forType:unit];
-}
-
-- (void)removeTimeForType:(ButtrUnit)unit;
-{
-    [self updateTime:-1 forType:unit];
+    return (self.seconds + (self.minutes * 60) + (self.hours * 3600));
 }
 
 @end

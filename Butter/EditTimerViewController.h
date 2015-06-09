@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ColorHelper.h"
+
+@class TimerDisplayView, Timer;
 
 @interface EditTimerViewController : UIViewController
-
+@property (weak, nonatomic) IBOutlet TimerDisplayView *timerDisplayView;
+@property (strong, nonatomic) Timer *timer;
 @end

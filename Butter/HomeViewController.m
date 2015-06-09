@@ -17,7 +17,6 @@
 // views
 @property (weak, nonatomic) CAGradientLayer *backgroundGradient;
 @property (weak, nonatomic) IBOutlet UIButton *timerControl;
-@property (weak, nonatomic) IBOutlet TimerDisplayView *timerDisplayView;
 
 // utilities
 @property (strong, nonatomic) NSTimer *intervalCounter;
@@ -74,13 +73,27 @@
 
 #pragma mark - Gestures and Events
 
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"timer.duration"]) {
+        [self removeObserver:self forKeyPath:keyPath];
+        [self.timerDisplayView renderTime:[self.timer.duration integerValue]];
+        [self startTimer];
+    }
+}
+
 - (void)timerFired:(NSTimer *)intervalCounter
 {
     NSTimeInterval secondsBetween = [[NSDate date] timeIntervalSinceDate:self.timer.startTime];
-    [self.timerDisplayView renderTime:secondsBetween];
     
-    if ([self.timer.duration intValue] > 0 && ([[NSNumber numberWithDouble:secondsBetween] intValue] >= [self.timer.duration intValue])) {
-        [intervalCounter invalidate];
+    if (self.timer.duration) {
+        [self.timerDisplayView renderTime:([self.timer.duration integerValue] - secondsBetween)];
+    } else {
+        [self.timerDisplayView renderTime:secondsBetween];
+    }
+    
+    if ([self.timer.duration integerValue] > 0 && ([[NSNumber numberWithDouble:secondsBetween] intValue] >= [self.timer.duration integerValue])) {
+        [self stopTimer];
     }
 }
 
@@ -94,25 +107,41 @@
 {
     if (self.timerStarted) return;
     
+    [self addObserver:self forKeyPath:@"timer.duration" options:0 context:nil];
     EditTimerViewController *editTimerVc = [[EditTimerViewController alloc] initWithNibName:@"EditTimerViewController" bundle:nil];
+    editTimerVc.timer = self.timer;
     [self.navigationController showViewController:editTimerVc sender:nil];
+}
+
+- (void)startTimer
+{
+    [self.timerControl setTitle:@"Pause" forState:UIControlStateNormal];
+    self.timerStarted = YES;
+    
+    self.intervalCounter = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerFired:) userInfo:nil repeats:YES];
+    self.timer.startTime = [NSDate date];
+    [self.intervalCounter fire];
+}
+
+- (void)stopTimer
+{
+    [self.timerControl setTitle:@"Start" forState:UIControlStateNormal];
+    self.timerStarted = NO;
+    
+    [self.intervalCounter invalidate];
+    self.intervalCounter = nil;
+    
+    if (self.timer.duration) {
+        self.timer.duration = [NSNumber numberWithInteger:[self.timerDisplayView getTimerDuration]];
+    }
 }
 
 - (IBAction)toggleTimer:(id)sender
 {
     if (self.timerStarted) {
-        [self.timerControl setTitle:@"Start" forState:UIControlStateNormal];
-        self.timerStarted = NO;
-        
-        [self.intervalCounter invalidate];
-        self.intervalCounter = nil;
+        [self stopTimer];
     } else {
-        [self.timerControl setTitle:@"Pause" forState:UIControlStateNormal];
-        self.timerStarted = YES;
-
-        self.intervalCounter = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerFired:) userInfo:nil repeats:YES];
-        self.timer.startTime = [NSDate date];
-        [self.intervalCounter fire];
+        [self startTimer];
     }
 }
 

@@ -48,7 +48,7 @@
                             <constraint firstItem="cNP-yl-YB2" firstAttribute="top" secondItem="hvx-9Y-SKV" secondAttribute="bottom" constant="30" id="Zl4-2O-PUb"/>
                             <constraint firstAttribute="centerX" secondItem="cNP-yl-YB2" secondAttribute="centerX" constant="-1" id="g9r-Y9-DRH"/>
                             <constraint firstItem="hvx-9Y-SKV" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="ggs-fy-GKn"/>
-                            <constraint firstAttribute="centerY" secondItem="hvx-9Y-SKV" secondAttribute="centerY" constant="27.5" id="nVB-BB-Xw8"/>
+                            <constraint firstAttribute="centerY" secondItem="hvx-9Y-SKV" secondAttribute="centerY" constant="28" id="nVB-BB-Xw8"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="jX4-gp-IOt"/>

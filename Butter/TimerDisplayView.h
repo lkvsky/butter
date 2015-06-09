@@ -11,11 +11,11 @@
 typedef NS_ENUM(NSInteger, ButtrUnit) {
     ButtrSeconds,
     ButtrMinutes,
-    ButterHours
+    ButtrHours
 };
 
 @interface TimerDisplayView : UIView
+- (void)renderEditControls;
 - (void)renderTime:(NSInteger)time;
-- (void)addTimeForType:(ButtrUnit)unit;
-- (void)removeTimeForType:(ButtrUnit)unit;
+- (NSInteger)getTimerDuration;
 @end

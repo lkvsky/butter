@@ -7,8 +7,12 @@
 //
 
 #import "EditTimerViewController.h"
+#import "TimerDisplayView.h"
+#import "ColorHelper.h"
+#import "Timer.h"
 
 @interface EditTimerViewController ()
+@property (weak, nonatomic) IBOutlet UIButton *timerControl;
 @property (weak, nonatomic) CAGradientLayer *backgroundGradient;
 @end
 
@@ -30,11 +34,22 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"arrow-left-blue.png"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
 }
 
+- (void)setupTimer
+{
+    [self.timerDisplayView renderTime:0];
+    [self.timerDisplayView renderEditControls];
+    
+    self.timerControl.layer.borderColor = [UIColor blackColor].CGColor;
+    self.timerControl.layer.borderWidth = 2.0;
+    self.timerControl.layer.cornerRadius = 20.0;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self setupBackgroundGradient];
     [self setupNavBar];
+    [self setupTimer];
 }
 
 #pragma mark - Gestures and Events
@@ -51,5 +66,10 @@
     [self setupBackgroundGradient];
 }
 
+- (IBAction)startTimer:(id)sender
+{
+    self.timer.duration = [NSNumber numberWithInteger:[self.timerDisplayView getTimerDuration]];
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 @end
