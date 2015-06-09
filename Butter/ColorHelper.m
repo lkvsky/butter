@@ -25,13 +25,23 @@
 - (CAGradientLayer *)yellowGradient
 {
     CAGradientLayer *gradient = [CAGradientLayer layer];
-    UIColor *lightColor = [UIColor colorWithRed:241.0/255.0 green:183.0/255.0 blue:40.0/255.0 alpha:1.0];
-    UIColor *darkColor = [UIColor colorWithRed:239.0/255.0 green:165.0/255.0 blue:78.0/255.0 alpha:1.0];
+    UIColor *lightColor = [self lightYellow];
+    UIColor *darkColor = [self darkYellow];
     
     gradient.colors = @[(id)darkColor.CGColor, (id)lightColor.CGColor];
     gradient.locations = @[@0.0, @1.0];
     
     return gradient;
+}
+
+- (UIColor *)lightYellow
+{
+    return [UIColor colorWithRed:241.0/255.0 green:183.0/255.0 blue:40.0/255.0 alpha:1.0];
+}
+
+- (UIColor *)darkYellow
+{
+    return [UIColor colorWithRed:239.0/255.0 green:165.0/255.0 blue:78.0/255.0 alpha:1.0];
 }
 
 @end

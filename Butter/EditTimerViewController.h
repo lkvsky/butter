@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "ColorHelper.h"
 
-@interface AddTimerViewController : UIViewController
+@interface EditTimerViewController : UIViewController
 
 @end

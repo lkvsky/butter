@@ -10,19 +10,6 @@
 
 @implementation DataManager
 
-- (instancetype) init
-{
-    self = [super init];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(contextDidSave:) name:NSManagedObjectContextDidSaveNotification object:nil];
-    
-    return self;
-}
-
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
 + (instancetype)sharedInstance
 {
     static DataManager *dataManager = nil;
@@ -61,14 +48,14 @@
 
 #pragma mark - Notifications / Events
 
-- (void)contextDidSave:(NSNotification *)saveNotification
-{
-    if ([NSThread isMainThread]) {
-        [self.readingContext mergeChangesFromContextDidSaveNotification:saveNotification];
-    } else {
-        [self performSelectorOnMainThread:@selector(contextDidSave:) withObject:saveNotification waitUntilDone:NO];
-    }
-}
+//- (void)contextDidSave:(NSNotification *)saveNotification
+//{
+//    if ([NSThread isMainThread]) {
+//        [self.readingContext mergeChangesFromContextDidSaveNotification:saveNotification];
+//    } else {
+//        [self performSelectorOnMainThread:@selector(contextDidSave:) withObject:saveNotification waitUntilDone:NO];
+//    }
+//}
 
 #pragma mark - Create / Update Data
 

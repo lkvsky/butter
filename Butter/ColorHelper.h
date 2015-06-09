@@ -12,4 +12,6 @@
 @interface ColorHelper : NSObject
 + (instancetype)sharedInstance;
 - (CAGradientLayer *)yellowGradient;
+- (UIColor *)lightYellow;
+- (UIColor *)darkYellow;
 @end

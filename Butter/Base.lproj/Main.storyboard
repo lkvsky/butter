@@ -4,11 +4,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <mutableArray key="sanfranciscotext-regular-webfont.ttf">
-            <string>SanFranciscoText-Regular</string>
-        </mutableArray>
-    </customFonts>
     <scenes>
         <!--Home View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -22,21 +17,45 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Tap '+' to get cooking!" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dLo-2b-6un">
-                                <rect key="frame" x="37" y="253" width="527" height="94"/>
-                                <fontDescription key="fontDescription" name="SanFranciscoText-Regular" family="San Francisco Text" pointSize="50"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hvx-9Y-SKV" customClass="TimerDisplayView">
+                                <rect key="frame" x="16" y="218" width="568" height="109"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="109" id="quQ-gh-mKD"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cNP-yl-YB2">
+                                <rect key="frame" x="246" y="357" width="109" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="5U9-l0-Esv"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="bWT-TE-jpd"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="gR4-80-D7y"/>
+                                    <constraint firstAttribute="width" constant="109" id="nsT-kZ-Y45"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Start">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="toggleTimer:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qkd-NT-AWr"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="dLo-2b-6un" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="21" id="CWh-oB-obP"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="dLo-2b-6un" secondAttribute="trailing" constant="20" id="Uba-kY-3xj"/>
-                            <constraint firstAttribute="centerY" secondItem="dLo-2b-6un" secondAttribute="centerY" id="j4M-NM-0Zm"/>
+                            <constraint firstItem="hvx-9Y-SKV" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="5WL-Ky-dR7"/>
+                            <constraint firstItem="cNP-yl-YB2" firstAttribute="top" secondItem="hvx-9Y-SKV" secondAttribute="bottom" constant="30" id="Zl4-2O-PUb"/>
+                            <constraint firstAttribute="centerX" secondItem="cNP-yl-YB2" secondAttribute="centerX" constant="-1" id="g9r-Y9-DRH"/>
+                            <constraint firstItem="hvx-9Y-SKV" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="ggs-fy-GKn"/>
+                            <constraint firstAttribute="centerY" secondItem="hvx-9Y-SKV" secondAttribute="centerY" constant="27.5" id="nVB-BB-Xw8"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="jX4-gp-IOt"/>
+                    <connections>
+                        <outlet property="timerControl" destination="cNP-yl-YB2" id="273-l7-uhn"/>
+                        <outlet property="timerDisplayView" destination="hvx-9Y-SKV" id="R3e-m2-yaS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

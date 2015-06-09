@@ -6,13 +6,13 @@
 //  Copyright (c) 2015 Kyle Lucovsky. All rights reserved.
 //
 
-#import "AddTimerViewController.h"
+#import "EditTimerViewController.h"
 
-@interface AddTimerViewController ()
+@interface EditTimerViewController ()
 @property (weak, nonatomic) CAGradientLayer *backgroundGradient;
 @end
 
-@implementation AddTimerViewController
+@implementation EditTimerViewController
 
 #pragma mark - View Initialization
 
