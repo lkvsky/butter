@@ -16,6 +16,10 @@
 @property (weak, nonatomic) UILabel *secondsLabel;
 @property (weak, nonatomic) UILabel *minutesLabel;
 @property (weak, nonatomic) UILabel *hoursLabel;
+@property (weak, nonatomic) UIView *secondsControl;
+@property (weak, nonatomic) UIView *minutesControl;
+@property (weak, nonatomic) UIView *hoursControl;
+
 
 // metadata
 @property (nonatomic) NSInteger seconds;
@@ -276,6 +280,16 @@
                                                     multiplier:1.0
                                                       constant:-kLabelCenterOffset]];
     
+    self.secondsControl = secondsControl;
+    self.minutesControl = minutesControl;
+    self.hoursControl = hoursControl;
+}
+
+- (void)removeEditingControls
+{
+    [self.secondsControl removeFromSuperview];
+    [self.minutesControl removeFromSuperview];
+    [self.hoursControl removeFromSuperview];
 }
 
 - (void)renderTime:(NSInteger)time

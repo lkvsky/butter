@@ -9,7 +9,6 @@
 #import "HomeViewController.h"
 #import "ColorHelper.h"
 #import "DataManager.h"
-#import "EditTimerViewController.h"
 #import "Timer.h"
 #import "TimerDisplayView.h"
 
@@ -22,6 +21,7 @@
 @property (strong, nonatomic) NSTimer *intervalCounter;
 @property (strong, nonatomic) Timer *timer;
 @property (nonatomic) BOOL timerStarted;
+@property (nonatomic) BOOL editing;
 @end
 
 @implementation HomeViewController
@@ -73,26 +73,18 @@
 
 #pragma mark - Gestures and Events
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    if ([keyPath isEqualToString:@"timer.duration"]) {
-        [self removeObserver:self forKeyPath:keyPath];
-        [self.timerDisplayView renderTime:[self.timer.duration integerValue]];
-        [self startTimer];
-    }
-}
-
 - (void)timerFired:(NSTimer *)intervalCounter
 {
     NSTimeInterval secondsBetween = [[NSDate date] timeIntervalSinceDate:self.timer.startTime];
     
-    if (self.timer.duration) {
-        [self.timerDisplayView renderTime:([self.timer.duration integerValue] - secondsBetween)];
-    } else {
+    if ([self.timer.duration isEqualToNumber:@0]) {
         [self.timerDisplayView renderTime:secondsBetween];
+    } else {
+        [self.timerDisplayView renderTime:([self.timer.duration integerValue] - secondsBetween)];
     }
     
     if ([self.timer.duration integerValue] > 0 && ([[NSNumber numberWithDouble:secondsBetween] intValue] >= [self.timer.duration integerValue])) {
+        self.timer.duration = @0;
         [self stopTimer];
     }
 }
@@ -105,12 +97,17 @@
 
 - (void)editTimer:(UITapGestureRecognizer *)tap
 {
-    if (self.timerStarted) return;
-    
-    [self addObserver:self forKeyPath:@"timer.duration" options:0 context:nil];
-    EditTimerViewController *editTimerVc = [[EditTimerViewController alloc] initWithNibName:@"EditTimerViewController" bundle:nil];
-    editTimerVc.timer = self.timer;
-    [self.navigationController showViewController:editTimerVc sender:nil];
+    [UIView animateWithDuration:0.125
+                     animations:^{
+                         self.timerDisplayView.transform = CGAffineTransformMakeScale(0.9, 0.9);
+                     }
+                     completion:^(BOOL finished) {
+                         self.timerDisplayView.transform = CGAffineTransformIdentity;
+                         
+                         if (self.timerStarted) return;
+                         [self.timerDisplayView renderEditControls];
+                         self.editing = YES;
+                     }];
 }
 
 - (void)startTimer
@@ -131,7 +128,7 @@
     [self.intervalCounter invalidate];
     self.intervalCounter = nil;
     
-    if (self.timer.duration) {
+    if (![self.timer.duration isEqualToNumber:@0]) {
         self.timer.duration = [NSNumber numberWithInteger:[self.timerDisplayView getTimerDuration]];
     }
 }
@@ -141,6 +138,13 @@
     if (self.timerStarted) {
         [self stopTimer];
     } else {
+        if (self.editing) {
+            self.timer.duration = [NSNumber numberWithInteger:[self.timerDisplayView getTimerDuration]];
+            [self.timerDisplayView renderTime:[self.timer.duration integerValue]];
+            [self.timerDisplayView removeEditingControls];
+            self.editing = NO;
+        }
+        
         [self startTimer];
     }
 }

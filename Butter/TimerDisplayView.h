@@ -16,6 +16,7 @@ typedef NS_ENUM(NSInteger, ButtrUnit) {
 
 @interface TimerDisplayView : UIView
 - (void)renderEditControls;
+- (void)removeEditingControls;
 - (void)renderTime:(NSInteger)time;
 - (NSInteger)getTimerDuration;
 @end

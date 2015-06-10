@@ -16,15 +16,12 @@
 		2709132B1AFFF42000760545 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 270913291AFFF42000760545 /* LaunchScreen.xib */; };
 		270913371AFFF42100760545 /* ButterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 270913361AFFF42100760545 /* ButterTests.m */; };
 		270913451AFFFC5800760545 /* ColorHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 270913441AFFFC5800760545 /* ColorHelper.m */; };
-		270913491B0001CD00760545 /* EditTimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 270913471B0001CD00760545 /* EditTimerViewController.m */; };
-		2709134A1B0001CD00760545 /* EditTimerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 270913481B0001CD00760545 /* EditTimerViewController.xib */; };
 		3CB0F50D1B06735C00A57EB0 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CB0F50C1B06735C00A57EB0 /* DataManager.m */; };
 		3CB0F5281B13DED000A57EB0 /* Pacifico.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3CB0F5271B13DE8900A57EB0 /* Pacifico.ttf */; };
 		3CB0F52D1B13EA9900A57EB0 /* Timer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CB0F52C1B13EA9900A57EB0 /* Timer.m */; };
 		3CB0F5301B13EA9A00A57EB0 /* Interval.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CB0F52F1B13EA9A00A57EB0 /* Interval.m */; };
 		3CB0F5331B13EE0900A57EB0 /* ButterNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CB0F5321B13EE0900A57EB0 /* ButterNavigationViewController.m */; };
 		3CCC02591B2658EE00D54654 /* TimerDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CCC02581B2658EE00D54654 /* TimerDisplayView.m */; };
-		3CCC025C1B2761FC00D54654 /* EditTimerTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CCC025B1B2761FC00D54654 /* EditTimerTransition.m */; };
 		3CF707F81B151B2F00F6D9CE /* sanfranciscotext-bold-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3CF707F01B151B2F00F6D9CE /* sanfranciscotext-bold-webfont.ttf */; };
 		3CF707F91B151B2F00F6D9CE /* sanfranciscotext-bolditalic-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3CF707F11B151B2F00F6D9CE /* sanfranciscotext-bolditalic-webfont.ttf */; };
 		3CF707FA1B151B2F00F6D9CE /* sanfranciscotext-regular-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3CF707F21B151B2F00F6D9CE /* sanfranciscotext-regular-webfont.ttf */; };
@@ -60,9 +57,6 @@
 		270913361AFFF42100760545 /* ButterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ButterTests.m; sourceTree = "<group>"; };
 		270913431AFFFC5800760545 /* ColorHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorHelper.h; sourceTree = "<group>"; };
 		270913441AFFFC5800760545 /* ColorHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorHelper.m; sourceTree = "<group>"; };
-		270913461B0001CD00760545 /* EditTimerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditTimerViewController.h; sourceTree = "<group>"; };
-		270913471B0001CD00760545 /* EditTimerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditTimerViewController.m; sourceTree = "<group>"; };
-		270913481B0001CD00760545 /* EditTimerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditTimerViewController.xib; sourceTree = "<group>"; };
 		3CB0F50B1B06735C00A57EB0 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
 		3CB0F50C1B06735C00A57EB0 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
 		3CB0F5271B13DE8900A57EB0 /* Pacifico.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Pacifico.ttf; sourceTree = "<group>"; };
@@ -74,8 +68,6 @@
 		3CB0F5321B13EE0900A57EB0 /* ButterNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButterNavigationViewController.m; sourceTree = "<group>"; };
 		3CCC02571B2658EE00D54654 /* TimerDisplayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerDisplayView.h; sourceTree = "<group>"; };
 		3CCC02581B2658EE00D54654 /* TimerDisplayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimerDisplayView.m; sourceTree = "<group>"; };
-		3CCC025A1B2761FC00D54654 /* EditTimerTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditTimerTransition.h; sourceTree = "<group>"; };
-		3CCC025B1B2761FC00D54654 /* EditTimerTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditTimerTransition.m; sourceTree = "<group>"; };
 		3CF707F01B151B2F00F6D9CE /* sanfranciscotext-bold-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sanfranciscotext-bold-webfont.ttf"; sourceTree = "<group>"; };
 		3CF707F11B151B2F00F6D9CE /* sanfranciscotext-bolditalic-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sanfranciscotext-bolditalic-webfont.ttf"; sourceTree = "<group>"; };
 		3CF707F21B151B2F00F6D9CE /* sanfranciscotext-regular-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sanfranciscotext-regular-webfont.ttf"; sourceTree = "<group>"; };
@@ -183,9 +175,6 @@
 				270913211AFFF42000760545 /* HomeViewController.h */,
 				270913221AFFF42000760545 /* HomeViewController.m */,
 				270913241AFFF42000760545 /* Main.storyboard */,
-				270913461B0001CD00760545 /* EditTimerViewController.h */,
-				270913471B0001CD00760545 /* EditTimerViewController.m */,
-				270913481B0001CD00760545 /* EditTimerViewController.xib */,
 				3CB0F5311B13EE0900A57EB0 /* ButterNavigationViewController.h */,
 				3CB0F5321B13EE0900A57EB0 /* ButterNavigationViewController.m */,
 			);
@@ -197,8 +186,6 @@
 			children = (
 				270913431AFFFC5800760545 /* ColorHelper.h */,
 				270913441AFFFC5800760545 /* ColorHelper.m */,
-				3CCC025A1B2761FC00D54654 /* EditTimerTransition.h */,
-				3CCC025B1B2761FC00D54654 /* EditTimerTransition.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -312,7 +299,6 @@
 				3CF707FE1B151B2F00F6D9CE /* sanfranciscotext-thin-webfont.ttf in Resources */,
 				3CF707FF1B151B2F00F6D9CE /* sanfranciscotext-thinitalic-webfont.ttf in Resources */,
 				3CF707F91B151B2F00F6D9CE /* sanfranciscotext-bolditalic-webfont.ttf in Resources */,
-				2709134A1B0001CD00760545 /* EditTimerViewController.xib in Resources */,
 				3CB0F5281B13DED000A57EB0 /* Pacifico.ttf in Resources */,
 				3CF707F81B151B2F00F6D9CE /* sanfranciscotext-bold-webfont.ttf in Resources */,
 				270913261AFFF42000760545 /* Main.storyboard in Resources */,
@@ -339,9 +325,7 @@
 				270913201AFFF42000760545 /* Butter.xcdatamodeld in Sources */,
 				3CB0F5301B13EA9A00A57EB0 /* Interval.m in Sources */,
 				3CCC02591B2658EE00D54654 /* TimerDisplayView.m in Sources */,
-				270913491B0001CD00760545 /* EditTimerViewController.m in Sources */,
 				2709131D1AFFF42000760545 /* AppDelegate.m in Sources */,
-				3CCC025C1B2761FC00D54654 /* EditTimerTransition.m in Sources */,
 				270913231AFFF42000760545 /* HomeViewController.m in Sources */,
 				3CB0F52D1B13EA9900A57EB0 /* Timer.m in Sources */,
 				3CB0F50D1B06735C00A57EB0 /* DataManager.m in Sources */,
