@@ -16,6 +16,7 @@
 // views
 @property (weak, nonatomic) CAGradientLayer *backgroundGradient;
 @property (weak, nonatomic) IBOutlet UIButton *timerControl;
+@property (weak, nonatomic) IBOutlet TimerDisplayView *timerDisplayView;
 
 // utilities
 @property (strong, nonatomic) NSTimer *intervalCounter;
@@ -99,14 +100,12 @@
 {
     [UIView animateWithDuration:0.125
                      animations:^{
+                         if (!self.timerStarted && !self.editing) [self.timerDisplayView renderEditControls];
                          self.timerDisplayView.transform = CGAffineTransformMakeScale(0.9, 0.9);
                      }
                      completion:^(BOOL finished) {
                          self.timerDisplayView.transform = CGAffineTransformIdentity;
-                         
-                         if (self.timerStarted) return;
-                         [self.timerDisplayView renderEditControls];
-                         self.editing = YES;
+                         if (!self.timerStarted) self.editing = YES;
                      }];
 }
 

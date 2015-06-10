@@ -11,6 +11,5 @@
 @class TimerDisplayView;
 
 @interface HomeViewController : UIViewController
-@property (weak, nonatomic) IBOutlet TimerDisplayView *timerDisplayView;
 @end
 

@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "butter.png"
+      "filename" : "butter_gradient.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "butter-1.png"
+      "filename" : "butter_gradient@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "butter-2.png"
+      "filename" : "butter_gradient@3x.png"
     }
   ],
   "info" : {

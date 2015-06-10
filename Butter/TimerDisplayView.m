@@ -211,14 +211,17 @@
     switch (unit) {
         case ButtrSeconds:
             self.seconds += timeDifference;
+            self.seconds = [self adjustUnit:self.seconds toLimit:59];
             break;
             
         case ButtrMinutes:
             self.minutes += timeDifference;
+            self.minutes = [self adjustUnit:self.minutes toLimit:59];
             break;
             
         case ButtrHours:
             self.hours += timeDifference;
+            self.hours = [self adjustUnit:self.hours toLimit:23];
             break;
             
         default:
@@ -226,6 +229,17 @@
     }
     
     [self updateTimerLabel];
+}
+
+- (NSInteger)adjustUnit:(NSInteger)unit toLimit:(NSInteger)limit
+{
+    if (unit < 0) {
+        return limit;
+    } else if (unit > limit) {
+        return 0;
+    } else {
+        return unit;
+    }
 }
 
 - (void)updateTimerLabel
