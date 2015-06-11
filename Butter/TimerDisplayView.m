@@ -20,7 +20,6 @@
 @property (weak, nonatomic) UIView *minutesControl;
 @property (weak, nonatomic) UIView *hoursControl;
 
-
 // metadata
 @property (nonatomic) NSInteger seconds;
 @property (nonatomic) NSInteger minutes;

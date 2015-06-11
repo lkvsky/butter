@@ -22,6 +22,8 @@
 		3CB0F5301B13EA9A00A57EB0 /* Interval.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CB0F52F1B13EA9A00A57EB0 /* Interval.m */; };
 		3CB0F5331B13EE0900A57EB0 /* ButterNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CB0F5321B13EE0900A57EB0 /* ButterNavigationViewController.m */; };
 		3CCC02591B2658EE00D54654 /* TimerDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CCC02581B2658EE00D54654 /* TimerDisplayView.m */; };
+		3CD583041B28EB15005B9652 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CD583021B28EB15005B9652 /* Fabric.framework */; };
+		3CD583051B28EB15005B9652 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CD583031B28EB15005B9652 /* Crashlytics.framework */; };
 		3CF707F81B151B2F00F6D9CE /* sanfranciscotext-bold-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3CF707F01B151B2F00F6D9CE /* sanfranciscotext-bold-webfont.ttf */; };
 		3CF707F91B151B2F00F6D9CE /* sanfranciscotext-bolditalic-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3CF707F11B151B2F00F6D9CE /* sanfranciscotext-bolditalic-webfont.ttf */; };
 		3CF707FA1B151B2F00F6D9CE /* sanfranciscotext-regular-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3CF707F21B151B2F00F6D9CE /* sanfranciscotext-regular-webfont.ttf */; };
@@ -68,6 +70,8 @@
 		3CB0F5321B13EE0900A57EB0 /* ButterNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButterNavigationViewController.m; sourceTree = "<group>"; };
 		3CCC02571B2658EE00D54654 /* TimerDisplayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerDisplayView.h; sourceTree = "<group>"; };
 		3CCC02581B2658EE00D54654 /* TimerDisplayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimerDisplayView.m; sourceTree = "<group>"; };
+		3CD583021B28EB15005B9652 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		3CD583031B28EB15005B9652 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		3CF707F01B151B2F00F6D9CE /* sanfranciscotext-bold-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sanfranciscotext-bold-webfont.ttf"; sourceTree = "<group>"; };
 		3CF707F11B151B2F00F6D9CE /* sanfranciscotext-bolditalic-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sanfranciscotext-bolditalic-webfont.ttf"; sourceTree = "<group>"; };
 		3CF707F21B151B2F00F6D9CE /* sanfranciscotext-regular-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sanfranciscotext-regular-webfont.ttf"; sourceTree = "<group>"; };
@@ -81,6 +85,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CD583051B28EB15005B9652 /* Crashlytics.framework in Frameworks */,
+				3CD583041B28EB15005B9652 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,6 +121,7 @@
 		270913161AFFF42000760545 /* Butter */ = {
 			isa = PBXGroup;
 			children = (
+				3CD582FC1B28E894005B9652 /* Frameworks */,
 				3CCC02561B2658CA00D54654 /* Views */,
 				3CB0F5261B13DE4F00A57EB0 /* Fonts */,
 				3CB0F50A1B0670A800A57EB0 /* Utilities */,
@@ -213,6 +220,15 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		3CD582FC1B28E894005B9652 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3CD583021B28EB15005B9652 /* Fabric.framework */,
+				3CD583031B28EB15005B9652 /* Crashlytics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -223,6 +239,7 @@
 				270913101AFFF42000760545 /* Sources */,
 				270913111AFFF42000760545 /* Frameworks */,
 				270913121AFFF42000760545 /* Resources */,
+				3CD583011B28EA52005B9652 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -315,6 +332,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3CD583011B28EA52005B9652 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run d5fa13dcccb309a0e9011863c1335089a14445b2";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		270913101AFFF42000760545 /* Sources */ = {
@@ -455,6 +488,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Butter",
+				);
 				INFOPLIST_FILE = Butter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -466,6 +503,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Butter",
+				);
 				INFOPLIST_FILE = Butter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";

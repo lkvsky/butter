@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "DataManager.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
 
 @interface AppDelegate ()
 
@@ -19,6 +21,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     DataManager *dataManager = [DataManager sharedInstance];
     dataManager.persistentStoreCoordinator = self.persistentStoreCoordinator;
+    
+    // start crashlytics
+    [Fabric with:@[CrashlyticsKit]];
     
     return YES;
 }
