@@ -23,35 +23,66 @@
                                     <constraint firstAttribute="height" constant="200" id="rjE-D8-HUF"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cNP-yl-YB2">
-                                <rect key="frame" x="246" y="428" width="109" height="50"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bAJ-C6-p4q">
+                                <rect key="frame" x="180" y="408" width="241" height="67"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cNP-yl-YB2">
+                                        <rect key="frame" x="8" y="8" width="109" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="CBY-gU-DeB"/>
+                                            <constraint firstAttribute="width" constant="109" id="MYr-sv-aZv"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title="Start">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="toggleTimer:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qkd-NT-AWr"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nsa-S5-u6K">
+                                        <rect key="frame" x="124" y="8" width="109" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="109" id="aXV-ew-zju"/>
+                                            <constraint firstAttribute="height" constant="50" id="aj4-Ma-91f"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal" title="Clear">
+                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="clearTimer:" destination="BYZ-38-t0r" eventType="touchUpInside" id="B5l-ba-zKj"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="CBY-gU-DeB"/>
-                                    <constraint firstAttribute="width" constant="109" id="MYr-sv-aZv"/>
+                                    <constraint firstItem="cNP-yl-YB2" firstAttribute="leading" secondItem="bAJ-C6-p4q" secondAttribute="leadingMargin" id="gjH-Sz-Lyg"/>
+                                    <constraint firstAttribute="height" constant="67" id="i8I-TL-yfz"/>
+                                    <constraint firstItem="Nsa-S5-u6K" firstAttribute="leading" secondItem="cNP-yl-YB2" secondAttribute="trailing" constant="7" id="ijF-nI-bZE"/>
+                                    <constraint firstItem="cNP-yl-YB2" firstAttribute="top" secondItem="bAJ-C6-p4q" secondAttribute="topMargin" id="nKQ-vV-nBO"/>
+                                    <constraint firstItem="cNP-yl-YB2" firstAttribute="baseline" secondItem="Nsa-S5-u6K" secondAttribute="baseline" id="zev-ZX-3nx"/>
+                                    <constraint firstAttribute="width" constant="241" id="zwu-Vk-sRz"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Start">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="toggleTimer:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qkd-NT-AWr"/>
-                                </connections>
-                            </button>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="cNP-yl-YB2" firstAttribute="top" secondItem="hvx-9Y-SKV" secondAttribute="bottom" constant="28" id="NFC-98-3Ck"/>
+                            <constraint firstAttribute="centerX" secondItem="bAJ-C6-p4q" secondAttribute="centerX" id="Lvp-Cg-gzf"/>
                             <constraint firstItem="hvx-9Y-SKV" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="kAc-wR-KnK"/>
-                            <constraint firstItem="cNP-yl-YB2" firstAttribute="centerX" secondItem="hvx-9Y-SKV" secondAttribute="centerX" id="oJz-yD-sAB"/>
+                            <constraint firstItem="bAJ-C6-p4q" firstAttribute="top" secondItem="hvx-9Y-SKV" secondAttribute="bottom" constant="8" id="t2k-Yd-Kc0"/>
                             <constraint firstItem="hvx-9Y-SKV" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="urS-7Q-hfk"/>
                             <constraint firstAttribute="centerY" secondItem="hvx-9Y-SKV" secondAttribute="centerY" id="zqF-7v-Ohj"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="jX4-gp-IOt"/>
                     <connections>
+                        <outlet property="clearTimer" destination="Nsa-S5-u6K" id="pSr-rK-hFm"/>
                         <outlet property="timerControl" destination="cNP-yl-YB2" id="273-l7-uhn"/>
                         <outlet property="timerDisplayContainer" destination="hvx-9Y-SKV" id="5oo-h9-HJr"/>
+                        <outletCollection property="timerButtons" destination="cNP-yl-YB2" id="UI0-gj-1lw"/>
+                        <outletCollection property="timerButtons" destination="Nsa-S5-u6K" id="m3z-zT-hUg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

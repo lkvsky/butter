@@ -17,9 +17,12 @@
 // views
 @property (weak, nonatomic) CAGradientLayer *backgroundGradient;
 @property (weak, nonatomic) IBOutlet UIButton *timerControl;
+@property (weak, nonatomic) IBOutlet UIButton *clearTimer;
 @property (weak, nonatomic) IBOutlet UIView *timerDisplayContainer;
 @property (weak, nonatomic) TimerDisplayView *timerDisplayView;
 
+// IBOutletCollections
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *timerButtons;
 
 // utilities
 @property (strong, nonatomic) NSTimer *intervalCounter;
@@ -41,7 +44,7 @@
     [self setupNavBar];
     [self setupBackgroundGradient];
     [self setupTimerDisplayView];
-    [self setupTimerControl];
+    [self setupTimerControls];
     [self setupNewTimer];
 }
 
@@ -106,11 +109,13 @@
     self.timer = (Timer *)[NSEntityDescription insertNewObjectForEntityForName:@"Timer" inManagedObjectContext:dataManager.insertionContext];
 }
 
-- (void)setupTimerControl
+- (void)setupTimerControls
 {
-    self.timerControl.layer.borderColor = [UIColor blackColor].CGColor;
-    self.timerControl.layer.borderWidth = 2.0;
-    self.timerControl.layer.cornerRadius = 20.0;
+    for (UIButton *button in self.timerButtons) {
+        button.layer.borderColor = [UIColor blackColor].CGColor;
+        button.layer.borderWidth = 2.0;
+        button.layer.cornerRadius = 20.0;
+    }
 }
 
 - (void)playButterBark
@@ -142,11 +147,11 @@
 {
     NSTimeInterval secondsBetween = [[NSDate date] timeIntervalSinceDate:self.timer.startTime];
     
-    if ([self.timer.duration isEqualToNumber:@0]) {
-        self.timerDisplayView.stopwatchMode = YES;
-        [self.timerDisplayView renderTime:secondsBetween];
+    if (self.timerDisplayView.stopwatchMode) {
+        NSInteger time = [self.timer.duration integerValue];
+        [self.timerDisplayView renderTime:time];
+        self.timer.duration = [NSNumber numberWithInteger:time + 1];
     } else {
-        self.timerDisplayView.stopwatchMode = NO;
         [self.timerDisplayView renderTime:([self.timer.duration integerValue] - secondsBetween)];
     }
     
@@ -165,11 +170,15 @@
 
 - (void)startTimer
 {
+    if ([self.timer.duration isEqualToNumber:@0] && self.timerDisplayView.stopwatchMode == NO) {
+        self.timerDisplayView.stopwatchMode = YES;
+    }
+    
     [self.timerControl setTitle:@"Pause" forState:UIControlStateNormal];
     self.timerStarted = YES;
+    self.timer.startTime = [NSDate date];
     
     self.intervalCounter = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerFired:) userInfo:nil repeats:YES];
-    self.timer.startTime = [NSDate date];
     [self.intervalCounter fire];
 }
 
@@ -206,18 +215,18 @@
         UITouch *touch = (UITouch *)obj;
         CGPoint touchPoint = [touch locationInView:self.timerDisplayView];
         
+        [UIView animateWithDuration:0.125
+                         animations:^{
+                             self.timerDisplayView.transform = CGAffineTransformIdentity;
+                         }];
+        
         if ([self.timerDisplayView pointInside:touchPoint withEvent:nil]) {
             [UIView animateWithDuration:0.125
                              animations:^{
-                                 if (!self.timerStarted && !self.editing) {
-                                     self.timerDisplayView.stopwatchMode = NO;
+                                 if (!self.timerStarted && !self.editing && !self.timerDisplayView.stopwatchMode) {
                                     [self.timerDisplayView renderEditControls];
+                                     self.editing = YES;
                                  }
-                                 
-                                 self.timerDisplayView.transform = CGAffineTransformIdentity;
-                             }
-                             completion:^(BOOL finished) {
-                                 if (!self.timerStarted) self.editing = YES;
                              }];
         }
     }];
@@ -236,6 +245,22 @@
         }
         
         [self startTimer];
+    }
+}
+
+- (IBAction)clearTimer:(id)sender
+{
+    if (self.timerStarted) {
+        [self stopTimer];
+    }
+    
+    self.timer.duration = @0;
+    [self.timerDisplayView renderTime:0];
+    self.timerDisplayView.stopwatchMode = NO;
+    
+    if (self.editing) {
+        [self.timerDisplayView removeEditingControls];
+        self.editing = NO;
     }
 }
 
