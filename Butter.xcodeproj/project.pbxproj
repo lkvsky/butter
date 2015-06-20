@@ -24,6 +24,9 @@
 		3CCC02591B2658EE00D54654 /* TimerDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CCC02581B2658EE00D54654 /* TimerDisplayView.m */; };
 		3CD583041B28EB15005B9652 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CD583021B28EB15005B9652 /* Fabric.framework */; };
 		3CD583051B28EB15005B9652 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CD583031B28EB15005B9652 /* Crashlytics.framework */; };
+		3CD583071B2B7333005B9652 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CD583061B2B7333005B9652 /* AudioToolbox.framework */; };
+		3CD5830B1B2B767E005B9652 /* butter_bark.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3CD5830A1B2B767E005B9652 /* butter_bark.wav */; };
+		3CD583141B35BB4F005B9652 /* TimerDisplayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3CD583131B35BB4F005B9652 /* TimerDisplayView.xib */; };
 		3CF707F81B151B2F00F6D9CE /* sanfranciscotext-bold-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3CF707F01B151B2F00F6D9CE /* sanfranciscotext-bold-webfont.ttf */; };
 		3CF707F91B151B2F00F6D9CE /* sanfranciscotext-bolditalic-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3CF707F11B151B2F00F6D9CE /* sanfranciscotext-bolditalic-webfont.ttf */; };
 		3CF707FA1B151B2F00F6D9CE /* sanfranciscotext-regular-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3CF707F21B151B2F00F6D9CE /* sanfranciscotext-regular-webfont.ttf */; };
@@ -72,6 +75,9 @@
 		3CCC02581B2658EE00D54654 /* TimerDisplayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimerDisplayView.m; sourceTree = "<group>"; };
 		3CD583021B28EB15005B9652 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		3CD583031B28EB15005B9652 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		3CD583061B2B7333005B9652 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		3CD5830A1B2B767E005B9652 /* butter_bark.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = butter_bark.wav; sourceTree = "<group>"; };
+		3CD583131B35BB4F005B9652 /* TimerDisplayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimerDisplayView.xib; sourceTree = "<group>"; };
 		3CF707F01B151B2F00F6D9CE /* sanfranciscotext-bold-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sanfranciscotext-bold-webfont.ttf"; sourceTree = "<group>"; };
 		3CF707F11B151B2F00F6D9CE /* sanfranciscotext-bolditalic-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sanfranciscotext-bolditalic-webfont.ttf"; sourceTree = "<group>"; };
 		3CF707F21B151B2F00F6D9CE /* sanfranciscotext-regular-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sanfranciscotext-regular-webfont.ttf"; sourceTree = "<group>"; };
@@ -85,6 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CD583071B2B7333005B9652 /* AudioToolbox.framework in Frameworks */,
 				3CD583051B28EB15005B9652 /* Crashlytics.framework in Frameworks */,
 				3CD583041B28EB15005B9652 /* Fabric.framework in Frameworks */,
 			);
@@ -103,6 +110,7 @@
 		2709130B1AFFF42000760545 = {
 			isa = PBXGroup;
 			children = (
+				3CD583061B2B7333005B9652 /* AudioToolbox.framework */,
 				270913161AFFF42000760545 /* Butter */,
 				270913331AFFF42100760545 /* ButterTests */,
 				270913151AFFF42000760545 /* Products */,
@@ -121,6 +129,7 @@
 		270913161AFFF42000760545 /* Butter */ = {
 			isa = PBXGroup;
 			children = (
+				3CD5830C1B2B780F005B9652 /* Resources */,
 				3CD582FC1B28E894005B9652 /* Frameworks */,
 				3CCC02561B2658CA00D54654 /* Views */,
 				3CB0F5261B13DE4F00A57EB0 /* Fonts */,
@@ -216,6 +225,7 @@
 			children = (
 				3CCC02571B2658EE00D54654 /* TimerDisplayView.h */,
 				3CCC02581B2658EE00D54654 /* TimerDisplayView.m */,
+				3CD583131B35BB4F005B9652 /* TimerDisplayView.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -227,6 +237,14 @@
 				3CD583031B28EB15005B9652 /* Crashlytics.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3CD5830C1B2B780F005B9652 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3CD5830A1B2B767E005B9652 /* butter_bark.wav */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -311,12 +329,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CD5830B1B2B767E005B9652 /* butter_bark.wav in Resources */,
 				3CF707FB1B151B2F00F6D9CE /* sanfranciscotext-regularitalic-webfont.ttf in Resources */,
 				3CF707FA1B151B2F00F6D9CE /* sanfranciscotext-regular-webfont.ttf in Resources */,
 				3CF707FE1B151B2F00F6D9CE /* sanfranciscotext-thin-webfont.ttf in Resources */,
 				3CF707FF1B151B2F00F6D9CE /* sanfranciscotext-thinitalic-webfont.ttf in Resources */,
 				3CF707F91B151B2F00F6D9CE /* sanfranciscotext-bolditalic-webfont.ttf in Resources */,
 				3CB0F5281B13DED000A57EB0 /* Pacifico.ttf in Resources */,
+				3CD583141B35BB4F005B9652 /* TimerDisplayView.xib in Resources */,
 				3CF707F81B151B2F00F6D9CE /* sanfranciscotext-bold-webfont.ttf in Resources */,
 				270913261AFFF42000760545 /* Main.storyboard in Resources */,
 				2709132B1AFFF42000760545 /* LaunchScreen.xib in Resources */,

@@ -15,6 +15,8 @@ typedef NS_ENUM(NSInteger, ButtrUnit) {
 };
 
 @interface TimerDisplayView : UIView
+@property (nonatomic) BOOL stopwatchMode;
+
 - (void)renderEditControls;
 - (void)removeEditingControls;
 - (void)renderTime:(NSInteger)time;

@@ -13,12 +13,14 @@
 @interface TimerDisplayView()
 
 // sub-views
-@property (weak, nonatomic) UILabel *secondsLabel;
-@property (weak, nonatomic) UILabel *minutesLabel;
-@property (weak, nonatomic) UILabel *hoursLabel;
-@property (weak, nonatomic) UIView *secondsControl;
-@property (weak, nonatomic) UIView *minutesControl;
-@property (weak, nonatomic) UIView *hoursControl;
+@property (weak, nonatomic) IBOutlet UIView *labelContainer;
+@property (weak, nonatomic) IBOutlet UILabel *secondsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *minutesLabel;
+@property (weak, nonatomic) IBOutlet UILabel *hoursLabel;
+
+// IBOutletCollections
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *buttons;
+@property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *labels;
 
 // metadata
 @property (nonatomic) NSInteger seconds;
@@ -38,6 +40,11 @@
     return self;
 }
 
+- (void)dealloc
+{
+    [self removeObserver:self forKeyPath:@"stopwatchMode"];
+}
+
 - (void)awakeFromNib
 {
     [self setup];
@@ -47,160 +54,39 @@
 {
     self.translatesAutoresizingMaskIntoConstraints = NO;
     self.backgroundColor = [UIColor clearColor];
-    [self setupTimerLabel];
-}
-
-- (void)setupTimerLabel
-{
-    // initialize labels
-    UILabel *secondsLabel = [[UILabel alloc] init];
-    UILabel *minutesLabel = [[UILabel alloc] init];
-    UILabel *hoursLabel = [[UILabel alloc] init];
+    self.multipleTouchEnabled = YES;
     
-    // initialize dividers
-    UILabel *leftDivider = [[UILabel alloc] init];
-    UILabel *rightDivider = [[UILabel alloc] init];
-    leftDivider.text = @":";
-    rightDivider.text = @":";
+    [self addObserver:self forKeyPath:@"stopwatchMode" options:0 context:nil];
     
-    // add general attributes and vertically center
-    for (UILabel *label in @[secondsLabel, minutesLabel, hoursLabel, leftDivider, rightDivider]) {
-        label.translatesAutoresizingMaskIntoConstraints = NO;
-        label.font = [UIFont fontWithName:@"SanFranciscoText-Regular" size:80];
-        [self addSubview:label];
-        
-        [self addConstraint:[NSLayoutConstraint constraintWithItem:label
-                                                         attribute:NSLayoutAttributeCenterY
-                                                         relatedBy:NSLayoutRelationEqual
-                                                            toItem:self
-                                                         attribute:NSLayoutAttributeCenterY
-                                                        multiplier:1.0
-                                                          constant:-20]];
-    }
-    
-    // store weak references
-    self.secondsLabel = secondsLabel;
-    self.minutesLabel = minutesLabel;
-    self.hoursLabel = hoursLabel;
-    
-    // apply horizontal center constraints for labels
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:secondsLabel
-                                                     attribute:NSLayoutAttributeCenterX
-                                                     relatedBy:NSLayoutRelationEqual
-                                                        toItem:self
-                                                     attribute:NSLayoutAttributeCenterX
-                                                    multiplier:1.0
-                                                      constant:kLabelCenterOffset]];
-    
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:minutesLabel
-                                                     attribute:NSLayoutAttributeCenterX
-                                                     relatedBy:NSLayoutRelationEqual
-                                                        toItem:self
-                                                     attribute:NSLayoutAttributeCenterX
-                                                    multiplier:1.0
-                                                      constant:0]];
-    
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:hoursLabel
-                                                     attribute:NSLayoutAttributeCenterX
-                                                     relatedBy:NSLayoutRelationEqual
-                                                        toItem:self
-                                                     attribute:NSLayoutAttributeCenterX
-                                                    multiplier:1.0
-                                                      constant:-kLabelCenterOffset]];
-    
-    // apply horizontal center constraints for dividers
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:leftDivider
-                                                     attribute:NSLayoutAttributeCenterX
-                                                     relatedBy:NSLayoutRelationEqual
-                                                        toItem:self
-                                                     attribute:NSLayoutAttributeCenterX
-                                                    multiplier:1.0
-                                                      constant:-kLabelCenterOffset / 2]];
-    
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:rightDivider
-                                                     attribute:NSLayoutAttributeCenterX
-                                                     relatedBy:NSLayoutRelationEqual
-                                                        toItem:self
-                                                     attribute:NSLayoutAttributeCenterX
-                                                    multiplier:1.0
-                                                      constant:kLabelCenterOffset / 2]];
-}
-
-- (UIView *)createEditControlsForType:(ButtrUnit)unit
-{
-    UIButton *addButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    UIButton *subtractButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    UIView *buttonContainer = [[UIView alloc] init];
-    
-    [addButton setTitle:@"+" forState:UIControlStateNormal];
-    [subtractButton setTitle:@"-" forState:UIControlStateNormal];
-    
-    [addButton addTarget:self action:@selector(addControlTapped:) forControlEvents:UIControlEventTouchUpInside];
-    [subtractButton addTarget:self action:@selector(subtractControlTapped:) forControlEvents:UIControlEventTouchUpInside];
-    
-    
-    for (UIButton *button in @[subtractButton, addButton]) {
-        [buttonContainer addSubview:button];
-        button.tag = unit;
-        button.translatesAutoresizingMaskIntoConstraints = NO;
-        button.layer.cornerRadius = 15;
-        button.layer.borderColor = [UIColor blackColor].CGColor;
+    for (UIButton *button in self.buttons) {
         button.layer.borderWidth = 1;
-        
-        [buttonContainer addConstraint:[NSLayoutConstraint constraintWithItem:button
-                                                                    attribute:NSLayoutAttributeWidth
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:buttonContainer
-                                                                    attribute:NSLayoutAttributeWidth
-                                                                   multiplier:0.5
-                                                                     constant:-1]];
-        
-        [buttonContainer addConstraint:[NSLayoutConstraint constraintWithItem:button
-                                                                    attribute:NSLayoutAttributeTop
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:buttonContainer
-                                                                    attribute:NSLayoutAttributeTop
-                                                                   multiplier:1.0
-                                                                     constant:0]];
-        
-        [buttonContainer addConstraint:[NSLayoutConstraint constraintWithItem:button
-                                                                    attribute:NSLayoutAttributeBottom
-                                                                    relatedBy:NSLayoutRelationEqual
-                                                                       toItem:buttonContainer
-                                                                    attribute:NSLayoutAttributeBottom
-                                                                   multiplier:1.0
-                                                                     constant:0]];
+        button.layer.borderColor = [UIColor blackColor].CGColor;
+        button.layer.cornerRadius = 15;
+        button.layer.opacity = 0;
     }
-    
-    [buttonContainer addConstraint:[NSLayoutConstraint constraintWithItem:subtractButton
-                                                                attribute:NSLayoutAttributeLeading
-                                                                relatedBy:NSLayoutRelationEqual
-                                                                   toItem:buttonContainer
-                                                                attribute:NSLayoutAttributeLeft
-                                                               multiplier:1.0
-                                                                 constant:0]];
-    
-    [buttonContainer addConstraint:[NSLayoutConstraint constraintWithItem:addButton
-                                                                attribute:NSLayoutAttributeTrailing
-                                                                relatedBy:NSLayoutRelationEqual
-                                                                   toItem:buttonContainer
-                                                                attribute:NSLayoutAttributeRight
-                                                               multiplier:1.0
-                                                                 constant:0]];
-    
-    return buttonContainer;
 }
 
 #pragma mark - Gestures and Events
 
-- (void)addControlTapped:(UIButton *)button
+- (IBAction)addControlTapped:(UIButton *)button
 {
     [self updateTime:1 forType:button.tag];
 }
 
-- (void)subtractControlTapped:(UIButton *)button
+- (IBAction)minusControlTapped:(UIButton *)button
 {
     [self updateTime:-1 forType:button.tag];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"stopwatchMode"]) {
+        if (self.stopwatchMode) {
+            [self renderStopwatchMode];
+        } else {
+            [self renderCountdownMode];
+        }
+    }
 }
 
 #pragma mark - Time Management Helpers
@@ -248,61 +134,34 @@
     self.hoursLabel.text = [NSString stringWithFormat:@"%02ld", (long)self.hours];
 }
 
+- (void)renderStopwatchMode
+{
+    for (UILabel *label in self.labels) {
+        label.textColor = [UIColor whiteColor];
+    }
+}
+
+- (void)renderCountdownMode
+{
+    for (UILabel *label in self.labels) {
+        label.textColor = [UIColor blackColor];
+    }
+}
+
 #pragma mark - Public Methods
 
 - (void)renderEditControls
 {
-    UIView *secondsControl = [self createEditControlsForType:ButtrSeconds];
-    UIView *minutesControl = [self createEditControlsForType:ButtrMinutes];
-    UIView *hoursControl = [self createEditControlsForType:ButtrHours];
-
-    for (UIView *controls in @[secondsControl, minutesControl, hoursControl]) {
-        controls.translatesAutoresizingMaskIntoConstraints = NO;
-        [self addSubview:controls];
-        
-        [self addConstraint:[NSLayoutConstraint constraintWithItem:controls
-                                                         attribute:NSLayoutAttributeCenterY
-                                                         relatedBy:NSLayoutRelationEqual
-                                                            toItem:self
-                                                         attribute:NSLayoutAttributeCenterY
-                                                        multiplier:1.0
-                                                          constant:kLabelCenterOffset/3]];
+    for (UIButton *button in self.buttons) {
+        button.layer.opacity = 1;
     }
-    
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:secondsControl
-                                                     attribute:NSLayoutAttributeCenterX
-                                                     relatedBy:NSLayoutRelationEqual
-                                                        toItem:self
-                                                     attribute:NSLayoutAttributeCenterX
-                                                    multiplier:1.0
-                                                      constant:kLabelCenterOffset]];
-    
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:minutesControl
-                                                     attribute:NSLayoutAttributeCenterX
-                                                     relatedBy:NSLayoutRelationEqual
-                                                        toItem:self
-                                                     attribute:NSLayoutAttributeCenterX
-                                                    multiplier:1.0
-                                                      constant:0]];
-    
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:hoursControl
-                                                     attribute:NSLayoutAttributeCenterX
-                                                     relatedBy:NSLayoutRelationEqual
-                                                        toItem:self
-                                                     attribute:NSLayoutAttributeCenterX
-                                                    multiplier:1.0
-                                                      constant:-kLabelCenterOffset]];
-    
-    self.secondsControl = secondsControl;
-    self.minutesControl = minutesControl;
-    self.hoursControl = hoursControl;
 }
 
 - (void)removeEditingControls
 {
-    [self.secondsControl removeFromSuperview];
-    [self.minutesControl removeFromSuperview];
-    [self.hoursControl removeFromSuperview];
+    for (UIButton *button in self.buttons) {
+        button.layer.opacity = 0;
+    }
 }
 
 - (void)renderTime:(NSInteger)time
